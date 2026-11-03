@@ -40,7 +40,7 @@ const Contact = () => {
       username: formData.name.trim(),
       useremail: formData.email.trim(),
       usersubject: formData.subject.trim(),
-      usermessage: formData.message.trim(), // FIXED: changed useremessage -> usermessage
+      usermessage: formData.message.trim(), 
     };
 
     setIsLoading(true);
@@ -50,7 +50,9 @@ const Contact = () => {
     });
 
     try {
-      const response = await fetch("api/sendmessage", {
+      const baseUrl = import.meta.env.VITE_API_URL || '';
+
+      const response = await fetch(`${baseUrl}/sendmessage`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -84,6 +86,7 @@ const Contact = () => {
       setIsLoading(false);
     }
   };
+
 
   const contactDetails = [
     { icon: FaEnvelope, title: 'Email Me', value: 'webdevabisai@gmail.com', link: 'mailto:webdevabisai@gmail.com' },
