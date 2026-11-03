@@ -65,7 +65,9 @@ export default function HireMe() {
     });
 
     try {
-      const response = await fetch("api/hireme", {
+      const baseUrl = import.meta.env.VITE_API_URL || '';
+
+      const response = await fetch(`${baseUrl}/hireme`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -99,6 +101,7 @@ export default function HireMe() {
       setIsLoading(false);
     }
   };
+
 
   return (
     <motion.div
