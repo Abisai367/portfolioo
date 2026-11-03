@@ -36,11 +36,10 @@ const Skills = () => {
     const fetchSkills = async () => {
       try {
         setLoading(true);
+        const baseUrl = import.meta.env.VITE_API_URL || '';
         const [coreRes, secondaryRes] = await Promise.all([
-          const baseUrl = typeof __API_URL__ !== 'undefined' ? __API_URL__ : '';
-          fetch(`${baseUrl}/coreskills`)
+          fetch(`${baseUrl}/coreskills`),
           fetch(`${baseUrl}/secondaryskills`)
-
         ]);
 
         if (!coreRes.ok || !secondaryRes.ok) {
