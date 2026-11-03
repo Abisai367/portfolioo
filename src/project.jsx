@@ -17,17 +17,24 @@ const Projects = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('api/projects') 
-      .then((res) => res.json())
+    const baseUrl = import.meta.env.VITE_API_URL || '';
+
+    fetch(`${baseUrl}/projects`) 
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`HTTP error! Status: ${res.status}`);
+        }
+        return res.json();
+      })
       .then((data) => {
         setProjectList(data);
         setLoading(false);
       })
       .catch((err) => {
-        console.error("Error fetching projects:", err);
         setLoading(false);
       });
   }, []);
+
 
   if (loading) {
     return (
