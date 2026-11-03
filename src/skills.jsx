@@ -37,8 +37,10 @@ const Skills = () => {
       try {
         setLoading(true);
         const [coreRes, secondaryRes] = await Promise.all([
-          fetch("api/coreskills"),
-          fetch("api/secondaryskills")
+          const baseUrl = typeof __API_URL__ !== 'undefined' ? __API_URL__ : '';
+          fetch(`${baseUrl}/coreskills`)
+          fetch(`${baseUrl}/secondaryskills`)
+
         ]);
 
         if (!coreRes.ok || !secondaryRes.ok) {
